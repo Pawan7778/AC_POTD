@@ -1,3 +1,5 @@
+// https://codeforces.com/problemset/problem/520/A?mobile=false
+
 #include <iostream>
 #include <string>
 #include <unordered_map>
