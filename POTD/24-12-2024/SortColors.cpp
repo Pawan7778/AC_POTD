@@ -49,9 +49,36 @@ void mergeSort(vector<int> &arr, int l, int h)
         merge(arr, l, m, h);
     }
 }
+// using merge sort
 void sortColors(vector<int> &nums)
 {
     mergeSort(nums, 0, nums.size() - 1);
+}
+// using dutch flag algo
+void sortColorsOptimized(vector<int> &nums)
+{
+    int n = nums.size();
+    int low = 0;
+    int mid = 0;
+    int high = n - 1;
+    while (mid <= high)
+    {
+        if (nums[mid] == 0)
+        {
+            swap(nums[low], nums[mid]);
+            low++;
+            mid++;
+        }
+        else if (nums[mid] == 1)
+        {
+            mid++;
+        }
+        else
+        {
+            swap(nums[mid], nums[high]);
+            high--;
+        }
+    }
 }
 
 void display(vector<int> &arr)
@@ -65,7 +92,7 @@ void display(vector<int> &arr)
 int main()
 {
     vector<int> nums = {2, 0, 2, 1, 1, 0};
-    sortColors(nums);
+    sortColorsOptimized(nums);
     display(nums);
     return 0;
 }
