@@ -7,21 +7,23 @@ int main()
     cin >> n >> k;
 
     int tl = 240 - k;
-    int ts = 0;
     int count = 0;
-
-    int i = 1;
-    while (i <= n)
+    int lo = 0;
+    int hi = n;
+    while (lo <= hi)
     {
-        ts += 5 * i;
-        if (ts > tl)
+        int mid = lo + (hi - lo) / 2;
+        int ts = (5 * mid * (mid + 1)) / 2;
+        if (ts <= tl)
         {
-            break;
+            count = mid;
+            lo = mid + 1;
         }
-        count++;
-        i++;
+        else
+        {
+            hi = mid - 1;
+        }
     }
-
     cout << count;
 
     return 0;
