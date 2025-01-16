@@ -1,43 +1,41 @@
-#include <bits/stdc++.h>
-using namespace std;
-int compress(vector<char> &chars)
+// https://leetcode.com/problems/string-compression/description/
+class Solution
 {
-    int j = 0;
-    int count = 1;
-    int n = chars.size();
-    for (int i = 1; i < chars.size();)
+public:
+    int compress(vector<char> &chars)
     {
-        if (chars[i] == chars[i - 1])
+        int n = chars.size();
+        if (n == 1)
         {
-            count++;
+            return 1;
         }
-        else
+
+        int j = 0;
+        int count = 1;
+
+        for (int i = 1; i <= n; i++)
         {
-            if (count > 1)
+            if (i < n && chars[i] == chars[i - 1])
             {
-                j++;
-                char ch = '0' + count;
-                chars[j] = ch;
-                j++;
+                count++;
             }
             else
             {
-                j++;
-            }
-            count = 1;
-        }
-        i++;
-    }
-    return j;
-}
-int main()
-{
-    vector<char> chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
-    int ans = compress(chars);
-    for (int i = 0; i < ans; i++)
-    {
-        cout << chars[i] << " ";
-    }
+                chars[j++] = chars[i - 1];
 
-    return 0;
-}
+                if (count > 1)
+                {
+                    string digits = to_string(count);
+                    for (char digit : digits)
+                    {
+                        chars[j++] = digit;
+                    }
+                }
+
+                count = 1;
+            }
+        }
+
+        return j;
+    }
+};
